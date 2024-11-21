@@ -70,7 +70,7 @@ function checkAuthentication() {
     const isLoggedIn = true; // Replace with actual login validation logic
     if (!isLoggedIn) {
         alert("You must log in to access this page.");
-        window.location.href = "login.html"; // Redirect to login page
+        window.location.href = "index.html"; // Redirect to login page
     }
 }
 
@@ -88,7 +88,7 @@ checkAuthentication();
         if (confirmLogout) {
             alert("You have been logged out.");
             // Redirect to the login page
-            window.location.href = "login.html"; // Replace with the correct path to your login page
+            window.location.href = "index.html"; // Replace with the correct path to your login page
         }
     });
 });
