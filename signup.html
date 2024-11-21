@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Online Health Center System</h1>
+    </header>
+    <main>
+        <div class="form-container">
+            <form id="signUpForm" class="auth-form">
+                <h2>Sign Up</h2>
+                <label for="signUpName">Name:</label>
+                <input type="text" id="signUpName" required placeholder="Enter your name">
+                <label for="signUpEmail">Email:</label>
+                <input type="email" id="signUpEmail" required placeholder="Enter your email">
+                <label for="signUpPassword">Password:</label>
+                <input type="password" id="signUpPassword" required placeholder="Create a password">
+                <button type="button" onclick="signUp()">Sign Up</button>
+                <p>Already have an account? <a href="login.html">Log In</a></p>
+            </form>
+        </div>
+    </main>
+    <script >
+// Sign-Up Function
+function signUp() {
+    const name = document.getElementById("signUpName").value.trim();  // Trim spaces
+    const email = document.getElementById("signUpEmail").value.trim();  // Trim spaces
+    const password = document.getElementById("signUpPassword").value.trim();  // Trim spaces
+
+    // Get the existing users from localStorage or an empty array if none
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Check if the email already exists
+    if (users.some(user => user.email === email)) {
+        alert("This email is already registered.");
+        return;
+    }
+
+    // Add new user to the array
+    const newUser = { name, email, password };
+    users.push(newUser);
+
+    // Save the updated users list back to localStorage
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("Account created successfully! Redirecting to Login page...");
+    window.location.href = "login.html"; // Redirect to login page
+}
+
+    </script>
+</body>
+</html>

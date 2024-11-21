@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login or Sign Up</title>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Online Health Center System</h1>
+    </header>
+    <main>
+        <div class="form-container">
+            <form id="loginForm" class="auth-form">
+                <h2>Log In</h2>
+                <label for="loginEmail">Email:</label>
+                <input type="email" id="loginEmail" required placeholder="Enter your email">
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" required placeholder="Enter your password">
+                <button type="button" onclick="login()">Log In</button>
+                <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+            </form>
+        </div>
+    </main>
+</body>
+<script>
+// Login Function
+function login() {
+    const email = document.getElementById("loginEmail").value.trim();  // Trim spaces
+    const password = document.getElementById("loginPassword").value.trim();  // Trim spaces
+
+    // Get the users from localStorage
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Find the user with the entered email
+    const user = users.find(user => user.email === email);
+
+    // Log for debugging
+    console.log(`Entered password: ${password}`);
+    console.log(`Stored password for ${email}: ${user ? user.password : "User not found"}`);
+
+    // Check if user exists and the password matches
+    if (user && user.password === password) {
+        alert(`Welcome back, ${user.name}! Redirecting to the Home Page...`);
+        window.location.href = "home.html"; // Redirect to the home page
+    } else {
+        alert("Invalid email or password.");
+    }
+}
+
+function logout() {
+    alert("You have been logged out.");
+    // Redirect to Login Page
+    window.location.href = "login.html"; // Replace "login.html" with the actual login page URL
+}
+</script>
+</html>

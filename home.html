@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Health Center System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Online Health Center System</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="appointments.html">Appointments</a></li>
+                <li><a href="available-doctors.html">Doctors</a></li>
+                <li><button id="logoutButton" class="logout-btn">Log Out</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="card">
+            <h2>Welcome to the Online Health Center System</h2>
+            <p>This platform is designed to provide patients with easy access to medical appointments, doctor availability, and health records. Navigate through the menu to access your profile, check-up schedule, appointments, and more.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Online Health Center System</p>
+    </footer>
+
+    <script>  // Ensure the script runs only after the DOM has fully loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the Logout Button
+            const logoutButton = document.getElementById("logoutButton");
+        
+            // Add a click event listener to the Logout Button
+            logoutButton.addEventListener("click", function () {
+                // Confirm logout action
+                const confirmLogout = confirm("Are you sure you want to log out?");
+                if (confirmLogout) {
+                    alert("You have been logged out.");
+                    // Redirect to the login page
+                    window.location.href = "login.html"; // Replace with the correct path to your login page
+                }
+            });
+        });
+        </script>
+</body>
+</html>

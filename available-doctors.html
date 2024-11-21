@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Doctors</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Online Health Center System</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="appointments.html">Appointments</a></li>
+                <li><a href="available-doctors.html">Doctors</a></li>
+                <li><button id="logoutButton" class="logout-btn">Log Out</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="card">
+            <h2>Available Doctors</h2>
+            <div class="doctor-grid">
+                <!-- Doctor 1 -->
+                <div class="doctor-card">
+                    <img src="doctor1.jpg" alt="Dr. Maria Santos" class="doctor-photo">
+                    <h3>Dr. Maria Santos</h3>
+                    <p><strong>Specialization:</strong> Dermatologist</p>
+                    <p><strong>Schedule:</strong> Tue-Thu, 10:00 AM - 3:00 PM</p>
+                    <p><strong>Contact:</strong> 0998-765-4321</p>
+                    <button onclick="scheduleWithDoctor('Dr. Maria Santos')">Schedule Appointment</button>
+                </div>
+
+                <!-- Doctor 2 -->
+                <div class="doctor-card">
+                    <img src="doctor2.jfif" alt="Dr. Juan Dela Cruz" class="doctor-photo">
+                    <h3>Dr. Juan Dela Cruz</h3>
+                    <p><strong>Specialization:</strong> Cardiologist</p>
+                    <p><strong>Schedule:</strong> Mon-Fri, 9:00 AM - 4:00 PM</p>
+                    <p><strong>Contact:</strong> 0999-123-4567</p>
+                    <button onclick="scheduleWithDoctor('Dr. Juan Dela Cruz')">Schedule Appointment</button>
+                </div>
+
+                <!-- Doctor 3 -->
+                <div class="doctor-card">
+                    <img src="doctor3.jfif" alt="Dr. Enrique Soriano" class="doctor-photo">
+                    <h3>Dr. Enrique Soriano</h3>
+                    <p><strong>Specialization:</strong> Pediatrician</p>
+                    <p><strong>Schedule:</strong> Wed-Fri, 1:00 PM - 5:00 PM</p>
+                    <p><strong>Contact:</strong> 0977-456-7890</p>
+                    <button onclick="scheduleWithDoctor('Dr. Enrique Soriano')">Schedule Appointment</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Online Health Center System</p>
+    </footer>
+
+    <script>
+        function scheduleWithDoctor(doctorName) {
+    // Redirect to the Appointment Page with the doctor's name as a query parameter
+    window.location.href = `appointments.html?doctor=${encodeURIComponent(doctorName)}`;
+}
+
+  // Ensure the script runs only after the DOM has fully loaded
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get the Logout Button
+    const logoutButton = document.getElementById("logoutButton");
+
+    // Add a click event listener to the Logout Button
+    logoutButton.addEventListener("click", function () {
+        // Confirm logout action
+        const confirmLogout = confirm("Are you sure you want to log out?");
+        if (confirmLogout) {
+            alert("You have been logged out.");
+            // Redirect to the login page
+            window.location.href = "login.html"; // Replace with the correct path to your login page
+        }
+    });
+});
+    </script>
+</body>
+</html>

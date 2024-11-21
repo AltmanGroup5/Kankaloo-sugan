@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Online Health Center System</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="appointments.html">Appointments</a></li>
+                <li><a href="available-doctors.html">Doctors</a></li>
+                <li><button id="logoutButton" class="logout-btn">Log Out</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="card">
+            <h2>Upcoming Schedule</h2>
+            <ul id="upcomingScheduleList">
+                <!-- Dynamic schedules will be added here -->
+            </ul>
+        </section>
+        <section class="card">
+            <h2>Done Schedule</h2>
+            <ul>
+                <li><strong>11/10/2024:</strong> Follow-up with Dr. Juan Dela Cruz - <span class="status done">Checked</span></li>
+                <li><strong>10/25/2024:</strong> Routine Blood Work - <span class="status done">Checked</span></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Online Health Center System</p>
+    </footer>
+
+    <script>
+        // Load schedules from localStorage
+        const upcomingScheduleList = document.getElementById("upcomingScheduleList");
+        let schedules = JSON.parse(localStorage.getItem("upcomingSchedules")) || [];
+
+        // Display schedules dynamically
+        function displaySchedules() {
+            upcomingScheduleList.innerHTML = ""; // Clear the list
+            schedules.forEach((schedule, index) => {
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `
+                    <strong>${schedule}</strong>
+                    <button class="cancel-btn" onclick="cancelSchedule(${index})">Cancel</button>
+                `;
+                upcomingScheduleList.appendChild(listItem);
+            });
+        }
+
+        // Cancel a schedule
+        function cancelSchedule(index) {
+            const confirmed = confirm("Are you sure you want to cancel this appointment?");
+            if (confirmed) {
+                schedules.splice(index, 1); // Remove the schedule from the array
+                localStorage.setItem("upcomingSchedules", JSON.stringify(schedules)); // Update localStorage
+                displaySchedules(); // Refresh the list
+            }
+        }
+
+        // Initial display of schedules
+        displaySchedules();
+
+          // Ensure the script runs only after the DOM has fully loaded
+document.addEventListener("DOMContentLoaded", function () {
+    // Get the Logout Button
+    const logoutButton = document.getElementById("logoutButton");
+
+    // Add a click event listener to the Logout Button
+    logoutButton.addEventListener("click", function () {
+        // Confirm logout action
+        const confirmLogout = confirm("Are you sure you want to log out?");
+        if (confirmLogout) {
+            alert("You have been logged out.");
+            // Redirect to the login page
+            window.location.href = "login.html"; // Replace with the correct path to your login page
+        }
+    });
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Online Health Center System</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="appointments.html">Appointments</a></li>
+                <li><a href="available-doctors.html">Doctors</a></li>
+                <li><button id="logoutButton" class="logout-btn">Log Out</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="card">
+            <h2>Book an Appointment</h2>
+            <form id="appointmentForm">
+                <!-- Doctor Selection -->
+                <label for="doctor">Choose a Doctor:</label>
+                <select id="doctor" name="doctor" required>
+                    <option value="" disabled>Select a Doctor</option>
+                    <option value="Dr. Maria Santos">Dr. Maria Santos (Dermatologist)</option>
+                    <option value="Dr. Juan Dela Cruz">Dr. Juan Dela Cruz (Cardiologist)</option>
+                    <option value="Dr. Enrique Soriano">Dr. Enrique Soriano (Pediatrician)</option>
+                </select>
+
+                <!-- Date Selection -->
+                <label for="date">Choose a Date:</label>
+                <input type="date" id="date" name="date" required>
+
+                <!-- Time Selection -->
+                <label for="time">Choose a Time:</label>
+                <input type="time" id="time" name="time" required>
+
+                <button type="button" id="confirmBtn">Confirm Appointment</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Online Health Center System</p>
+    </footer>
+
+    <script>
+        // Function to get query parameters from the URL
+        function getQueryParameter(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Pre-fill the doctor field if a doctor's name is passed in the URL
+        const doctorField = document.getElementById("doctor");
+        const selectedDoctor = getQueryParameter("doctor");
+
+        if (selectedDoctor) {
+            for (let option of doctorField.options) {
+                if (option.value === selectedDoctor) {
+                    option.selected = true;
+                    break;
+                }
+            }
+        }
+
+        // Confirm Appointment
+        document.getElementById("confirmBtn").addEventListener("click", function () {
+            const doctor = document.getElementById("doctor").value;
+            const date = document.getElementById("date").value;
+            const time = document.getElementById("time").value;
+
+            if (!doctor || !date || !time) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            // Store the appointment in localStorage
+            const appointmentDetails = `${date} at ${time} with ${doctor}`;
+            const appointments = JSON.parse(localStorage.getItem("upcomingSchedules")) || [];
+            appointments.push(appointmentDetails);
+            localStorage.setItem("upcomingSchedules", JSON.stringify(appointments));
+
+            alert("Appointment confirmed! It will appear in your schedule.");
+        });
+
+          // Ensure the script runs only after the DOM has fully loaded
+document.addEventListener("DOMContentLoaded", function () {
+    // Get the Logout Button
+    const logoutButton = document.getElementById("logoutButton");
+
+    // Add a click event listener to the Logout Button
+    logoutButton.addEventListener("click", function () {
+        // Confirm logout action
+        const confirmLogout = confirm("Are you sure you want to log out?");
+        if (confirmLogout) {
+            alert("You have been logged out.");
+            // Redirect to the login page
+            window.location.href = "login.html"; // Replace with the correct path to your login page
+        }
+    });
+});
+    </script>
+</body>
+</html>
